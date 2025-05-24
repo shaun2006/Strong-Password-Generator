@@ -2,7 +2,7 @@
 
 Welcome to the **Strong Password Generator** — a sleek, user-friendly web app designed to help you generate secure, random passwords with no clicks. Built with simplicity and security in mind.
 
-**Visit our website at** [](https://shaun2006.github.io/Strong-Password-Generator/)
+**Visit our website at** [Strong-Password-Generator](https://shaun2006.github.io/Strong-Password-Generator/)
 
 ## 🚀 Features
 
@@ -45,9 +45,9 @@ cd Strong-Password-Generator
 python -m http.server 8000
 ```
 ### Open the website in chrome 
-[localhost](localhost:8000)
+[localhost](http://localhost:8000)
 
 
 ## contributers 
-- Shaun 
-- Profile:- [Shaun2006 profile](https://github.com/shaun2006)
+1. Shaun 
+   - Profile:- [Shaun2006 profile](https://github.com/shaun2006)
