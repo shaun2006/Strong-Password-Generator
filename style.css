@@ -168,8 +168,6 @@ footer a {
   color: #ffcc00;
   font-weight: 600;
 }
-
-
 @media (max-width: 600px) {
   header {
     padding: 30px 15px;
