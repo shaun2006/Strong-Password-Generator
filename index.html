@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<!--
+   untitled.html
+   
+   Copyright 2025 Unknown <shaun@archlinux>
+   
+   This program is free software; you can redistribute it and/or modify
+   it under the terms of the GNU General Public License as published by
+   the Free Software Foundation; either version 2 of the License, or
+   (at your option) any later version.
+   
+   This program is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU General Public License for more details.
+   
+   You should have received a copy of the GNU General Public License
+   along with this program; if not, write to the Free Software
+   Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
+   MA 02110-1301, USA.
+   
+   
+-->
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Strong Password Generator</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <header>
+    <div class="logo">🔒</div>
+    <h1>Strong Password Generator</h1>
+    <p>This website generates strong passwords for you — secure, unique, and hacker-proof. Trust us. &#128519;</p>
+  </header>
+
+  <main class="content">
+    <div class="image-container">
+      <img src="girl-typing.webp" alt="Laptop typing" />
+    </div>
+
+    <div class="generator-box">
+      <div class="password-row">
+        <strong>Password:</strong>
+        <input type="text" id="passwordOutput" readonly />
+        <button onclick="copyPassword()" class="copy-btn">📋</button>
+      </div>
+
+      <div class="length-controls">
+        <label for="length">Length: <span id="lengthValue">12</span></label>
+        <input type="range" id="length" min="6" max="32" value="12" oninput="updatePassword()" />
+      </div>
+
+      <div class="checkboxes">
+        <label><input type="checkbox" id="uppercase" checked onchange="updatePassword()" /> Uppercase (A-Z)</label>
+        <label><input type="checkbox" id="lowercase" checked onchange="updatePassword()" /> Lowercase (a-z)</label>
+        <label><input type="checkbox" id="numbers" checked onchange="updatePassword()" /> Numbers (0-9)</label>
+        <label><input type="checkbox" id="symbols" checked onchange="updatePassword()" /> Symbols (!@#$...)</label>
+      </div>
+
+      <button onclick="generatePassword()">Generate Password</button>
+    </div>
+  </main>
+
+  <footer>
+    <div>🤖 Powered by AI</div>
+    <div>🌍 Used by 100M+ users</div>
+    <div><a href="#">📘 About</a></div>
+  </footer>
+
+  <script>
+    function updateLengthValue() {
+      document.getElementById('lengthValue').innerText = document.getElementById('length').value;
+    }
+
+    function updatePassword() {
+      updateLengthValue();
+      generatePassword();
+    }
+
+    function generatePassword() {
+      const length = parseInt(document.getElementById('length').value);
+      const useUpper = document.getElementById('uppercase').checked;
+      const useLower = document.getElementById('lowercase').checked;
+      const useNumbers = document.getElementById('numbers').checked;
+      const useSymbols = document.getElementById('symbols').checked;
+
+      const upper = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+      const lower = 'abcdefghijklmnopqrstuvwxyz';
+      const numbers = '0123456789';
+      const symbols = '!@#$%^&*()_+-=[]{}|;:,.<>?';
+
+      let allChars = '';
+      if (useUpper) allChars += upper;
+      if (useLower) allChars += lower;
+      if (useNumbers) allChars += numbers;
+      if (useSymbols) allChars += symbols;
+
+      let password = '';
+      if (!allChars) {
+        password = 'Select at least one option.';
+      } else {
+        for (let i = 0; i < length; i++) {
+          password += allChars.charAt(Math.floor(Math.random() * allChars.length));
+        }
+      }
+
+      document.getElementById('passwordOutput').value = password;
+    }
+
+    function copyPassword() {
+      const input = document.getElementById("passwordOutput");
+      const password = input.value;
+      if (!password || password.includes("Select")) return;
+
+      navigator.clipboard.writeText(password).then(() => {
+        alert("Password copied to clipboard!");
+      }).catch(err => {
+        alert("Copy failed.");
+      });
+    }
+
+    window.onload = generatePassword;
+  </script>
+
+</body>
+
+</html>
